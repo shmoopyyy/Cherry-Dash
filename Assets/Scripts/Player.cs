@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public enum meep; 
     //variables
     public float runSpeed;
     public float jumpSpeed;
     public float dashSpeed;
     public float dashDuration;
-    public float dashCooldown;
     bool isDashing;
     public LayerMask groundMask;
     private Rigidbody2D rigidBody;
@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
     { 
         isDashing = true;
         float horizontalInputs = Input.GetAxis("Horizontal");
-        rigidBody.velocity = new Vector2(dashSpeed * horizontalInputs, dashSpeed * rigidBody.velocity.y);
+        rigidBody.velocity = new Vector2(dashSpeed * horizontalInputs, rigidBody.velocity.y);
         yield return new WaitForSeconds(dashDuration);
         isDashing = false;
     }
