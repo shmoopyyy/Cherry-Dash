@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-      
+    public enum MovementState
+    {
+        Idle = 0,
+        Run = 1,
+        Jump = 2
+    }
     //variables
     public float RunSpeed;
     public float JumpSpeed;
@@ -80,7 +85,7 @@ public class Player : MonoBehaviour
 
     private void UpdateAnimation(float horizontalInput)
     {
-        bool isRunning;
+        MovementState currentState;
 
         if (horizontalInput > 0)
         {
@@ -91,16 +96,20 @@ public class Player : MonoBehaviour
             _spriteRenderer.flipX = true;
         }
 
-        if (horizontalInput != 0)
+        if (!IsGrounded())
         {
-            isRunning = true;
+            currentState = MovementState.Jump;
+        }
+        else if (horizontalInput != 0)
+        {
+            currentState = MovementState.Run;
         }
         else
         {
-            isRunning = false;
+            currentState = MovementState.Idle;
 
         }
 
-        _animator.SetBool("isRunning", isRunning);
+        _animator.SetInteger("MovementState", (int)currentState);
     }
 }
