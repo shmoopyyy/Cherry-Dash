@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -112,4 +113,16 @@ public class Player : MonoBehaviour
 
         _animator.SetInteger("MovementState", (int)currentState);
     }
+
+    private void GameOver()
+    {
+        float verticalInput = Input.GetAxis("Vertical");
+
+        if (verticalInput <= -7)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
+    }
 }
+
+
