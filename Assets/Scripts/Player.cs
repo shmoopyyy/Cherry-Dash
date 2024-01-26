@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     public float JumpSpeed;
     public float DashSpeed;
     public float DashDuration;
+    public float TrampolineJump;
     bool IsDashing;
 
     public LayerMask groundMask;
@@ -27,7 +28,7 @@ public class Player : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    { 
+    {
         _rigidBody = GetComponent<Rigidbody2D>();
         _boxCollider = GetComponent<BoxCollider2D>();
         _animator = GetComponent<Animator>();
@@ -60,13 +61,24 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Fruit potentialFruit = collision.gameObject.GetComponent<Fruit>();
+        Cherry potentialCherry = collision.gameObject.GetComponent<Cherry>();
 
-        if (potentialFruit != null)
+        if (potentialCherry != null)
         {
-            Destroy(potentialFruit.gameObject);
-        
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Trampoline potentialTrampoline = collision.gameObject.GetComponent<Trampoline>();
+
+        if (potentialTrampoline != null)
+        {
+            _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, TrampolineJump);
+        }
+
     }
 
     bool IsGrounded()
@@ -76,7 +88,7 @@ public class Player : MonoBehaviour
     }
 
     IEnumerator Dash()
-    { 
+    {
         IsDashing = true;
         float horizontalInputs = Input.GetAxis("Horizontal");
         _rigidBody.velocity = new Vector2(DashSpeed * horizontalInputs, _rigidBody.velocity.y);
@@ -113,16 +125,7 @@ public class Player : MonoBehaviour
 
         _animator.SetInteger("MovementState", (int)currentState);
     }
-
-    private void GameOver()
-    {
-        float verticalInput = Input.GetAxis("Vertical");
-
-        if (verticalInput <= -7)
-        {
-            SceneManager.LoadScene("GameOver");
-        }
-    }
 }
+  
 
 
