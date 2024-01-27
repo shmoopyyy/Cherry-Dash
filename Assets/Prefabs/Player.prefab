@@ -149,9 +149,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RunSpeed: 5
-  JumpSpeed: 5
+  JumpSpeed: 6
   DashSpeed: 20
   DashDuration: 0.25
+  TrampolineJump: 10
   groundMask:
     serializedVersion: 2
     m_Bits: 64
@@ -235,7 +236,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

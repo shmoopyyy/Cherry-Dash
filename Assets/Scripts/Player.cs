@@ -77,6 +77,14 @@ public class Player : MonoBehaviour
         if (potentialTrampoline != null)
         {
             _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, TrampolineJump);
+            potentialTrampoline.SendMessage("PlayTrampAnimation");
+        }
+
+        Spikes potentialSpikes = collision.gameObject.GetComponent<Spikes>();
+
+        if (potentialSpikes != null)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
     }

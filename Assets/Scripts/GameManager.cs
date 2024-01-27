@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public string GameOver = "GameOver";
     public GameObject Player;
-    private int _playerLives = 3;
+    
 
 
     // Start is called before the first frame update

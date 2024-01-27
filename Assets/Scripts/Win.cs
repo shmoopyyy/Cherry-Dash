@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TitleScreen : MonoBehaviour
+public class Win : MonoBehaviour
 {
-    public string levelOne = "Level1";
+    public string titleScene = "Title";
 
-    public void BeginGame()
+
+    public void ToTitle()
     {
-        SceneManager.LoadScene(levelOne);
+        SceneManager.LoadScene(titleScene);
     }
 
     public void ExitGame()
